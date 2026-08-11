@@ -4,7 +4,7 @@ import { Container } from "@/app/components/ui/container";
 import { Eyebrow } from "@/app/components/ui/eyebrow";
 import { ButtonLink } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { heroStats, site } from "@/app/lib/site";
+import { heroStats } from "@/app/lib/site";
 
 export function Hero() {
   return (
@@ -15,34 +15,42 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[68%_78%]"
+        className="object-cover object-[68%_78%] hero-fade"
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-blue-dark/82" aria-hidden="true" />
 
       <div className="relative z-[1]">
         <Container className="py-20 md:py-28 lg:py-32">
-          <div className="max-w-[40rem] motion-safe:animate-[fade-up_0.7s_ease_both]">
-            <Eyebrow>
-              Atuação no Rio de Janeiro
-            </Eyebrow>
+          <div className="max-w-[40rem]">
+            <div className="hero-enter">
+              <Eyebrow>Atuação no Rio de Janeiro</Eyebrow>
+            </div>
 
-            <h1 className="mt-6 font-serif text-[clamp(2.5rem,5vw,4.1rem)] leading-[1.08] font-medium tracking-[0.01em] text-white">
+            <h1 className="hero-enter hero-enter-delay-1 mt-6 font-serif text-[clamp(2.5rem,5vw,4.1rem)] leading-[1.08] font-medium tracking-[0.01em] text-white">
               Defesa técnica, conduzida com{" "}
               <em className="italic text-gold">discrição e rigor</em>.
             </h1>
 
-            <p className="mt-7 max-w-[34rem] text-[1.05rem] leading-relaxed text-white-warm/78">
+            <p className="hero-enter hero-enter-delay-2 mt-7 max-w-[34rem] text-[1.05rem] leading-relaxed text-white-warm/78">
               Escritório especializado em Direito Trabalhista, Previdenciário e
               Cível, com atendimento online e presencial, do primeiro contato à
               decisão.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="#contato" variant="primary" className="w-full md:w-auto">
+            <div className="hero-enter hero-enter-delay-3 mt-10 flex flex-wrap items-center gap-4">
+              <ButtonLink
+                href="#contato"
+                variant="primary"
+                className="w-full md:w-auto"
+              >
                 Agendar consulta
               </ButtonLink>
-              <ButtonLink href="#areas" variant="ghost" className="w-full md:w-auto">
+              <ButtonLink
+                href="#areas"
+                variant="ghost"
+                className="w-full md:w-auto"
+              >
                 Conhecer as áreas
               </ButtonLink>
             </div>

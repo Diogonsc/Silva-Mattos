@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { IconWhatsApp, IconLinkedIn, IconInstagram } from "@/app/components/icons/social";
 import { Container } from "@/app/components/ui/container";
 import { Eyebrow } from "@/app/components/ui/eyebrow";
+import { Reveal } from "@/app/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -30,7 +31,7 @@ export function Contact() {
     <section id="contato" className="bg-white-warm py-20 md:py-[120px]">
       <Container>
         <div className="grid grid-cols-1 overflow-hidden border border-border md:grid-cols-[1fr_1.05fr]">
-          <div className="bg-blue-dark px-7 py-11 text-white-warm md:px-12 md:py-14 lg:px-14">
+          <Reveal className="bg-blue-dark px-7 py-11 text-white-warm md:px-12 md:py-14 lg:px-14">
             <Eyebrow>Contato</Eyebrow>
             <h2 className="mt-4 font-serif text-[clamp(1.55rem,2.5vw,2.05rem)] leading-[1.2] font-medium tracking-[0.01em] text-white">
               Descreva seu caso. Respondemos em até um dia útil.
@@ -50,7 +51,7 @@ export function Contact() {
               <ContactLine label="Atendimento">{site.location}</ContactLine>
             </div>
 
-            <div className=" flex mt-10 gap-2">
+            <div className="mt-10 flex gap-2">
               <Button
                 asChild
                 variant="ghost"
@@ -97,88 +98,94 @@ export function Contact() {
                 </a>
               </Button>
             </div>
-          </div>
+          </Reveal>
 
-          <form
-            className="flex flex-col gap-6 bg-background px-7 py-11 md:px-12 md:py-14 lg:px-14"
-            onSubmit={handleSubmit}
-          >
-            <Field id="nome" label="Nome">
-              <Input
-                id="nome"
-                name="nome"
-                type="text"
-                placeholder="Seu nome completo"
-                autoComplete="name"
-                required
-              />
-            </Field>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <Field id="email" label="E-mail">
+          <Reveal delay={100}>
+            <form
+              className="flex flex-col gap-6 bg-background px-7 py-11 md:px-12 md:py-14 lg:px-14"
+              onSubmit={handleSubmit}
+            >
+              <Field id="nome" label="Nome">
                 <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  autoComplete="email"
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  placeholder="Seu nome completo"
+                  autoComplete="name"
                   required
                 />
               </Field>
-              <Field id="telefone" label="Telefone">
-                <Input
-                  id="telefone"
-                  name="telefone"
-                  type="tel"
-                  placeholder="(21) 90000-0000"
-                  autoComplete="tel"
+
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <Field id="email" label="E-mail">
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="seu@email.com"
+                    autoComplete="email"
+                    required
+                  />
+                </Field>
+                <Field id="telefone" label="Telefone">
+                  <Input
+                    id="telefone"
+                    name="telefone"
+                    type="tel"
+                    placeholder="(21) 90000-0000"
+                    autoComplete="tel"
+                  />
+                </Field>
+              </div>
+
+              <Field id="area" label="Área de interesse">
+                <input type="hidden" name="area" value={area} />
+                <Select value={area} onValueChange={setArea}>
+                  <SelectTrigger
+                    id="area"
+                    className="h-auto w-full rounded-none border-0 border-b border-input bg-transparent px-0.5 py-2.5 text-[0.98rem] shadow-none transition-[border-color] duration-200 focus-visible:border-gold focus-visible:ring-0 dark:bg-transparent dark:hover:bg-transparent"
+                  >
+                    <SelectValue placeholder="Selecione uma área" />
+                  </SelectTrigger>
+                  <SelectContent
+                    position="popper"
+                    align="start"
+                    className="w-(--radix-select-trigger-width)"
+                  >
+                    {interestAreas.map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+
+              <Field id="resumo" label="Resumo do caso">
+                <Textarea
+                  id="resumo"
+                  name="resumo"
+                  placeholder="Descreva brevemente o seu caso"
+                  required
                 />
               </Field>
-            </div>
 
-            <Field id="area" label="Área de interesse">
-              <input type="hidden" name="area" value={area} />
-              <Select value={area} onValueChange={setArea}>
-                <SelectTrigger
-                  id="area"
-                  className="h-auto w-full rounded-none border-0 border-b border-input bg-transparent px-0.5 py-2.5 text-[0.98rem] shadow-none focus-visible:border-ring focus-visible:ring-0 dark:bg-transparent dark:hover:bg-transparent"
-                >
-                  <SelectValue placeholder="Selecione uma área" />
-                </SelectTrigger>
-                <SelectContent position="popper" align="start" className="w-(--radix-select-trigger-width)">
-                  {interestAreas.map((item) => (
-                    <SelectItem key={item} value={item}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
+              <Button type="submit" variant="solid" className="mt-1 self-start">
+                Enviar mensagem
+              </Button>
 
-            <Field id="resumo" label="Resumo do caso">
-              <Textarea
-                id="resumo"
-                name="resumo"
-                placeholder="Descreva brevemente o seu caso"
-                required
-              />
-            </Field>
+              {submitted ? (
+                <p className="text-sm text-blue" role="status">
+                  Mensagem registrada. Em breve entraremos em contato.
+                </p>
+              ) : null}
 
-            <Button type="submit" variant="solid" className="mt-1 self-start">
-              Enviar mensagem
-            </Button>
-
-            {submitted ? (
-              <p className="text-sm text-blue" role="status">
-                Mensagem registrada. Em breve entraremos em contato.
+              <p className="text-[0.8rem] leading-relaxed text-muted-foreground">
+                As informações enviadas são tratadas sob sigilo profissional,
+                nos termos do Código de Ética e Disciplina da OAB.
               </p>
-            ) : null}
-
-            <p className="text-[0.8rem] leading-relaxed text-muted-foreground">
-              As informações enviadas são tratadas sob sigilo profissional,
-              nos termos do Código de Ética e Disciplina da OAB.
-            </p>
-          </form>
+            </form>
+          </Reveal>
         </div>
       </Container>
     </section>

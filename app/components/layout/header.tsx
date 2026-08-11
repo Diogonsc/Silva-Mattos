@@ -29,7 +29,7 @@ export function Header() {
               className="group relative py-1 text-blue transition-colors"
             >
               {link.label}
-              <span className="absolute bottom-0 left-0 h-px w-0 bg-gold transition-[width] duration-300 group-hover:w-full" />
+              <span className="absolute bottom-0 left-0 h-px w-0 bg-gold transition-[width] duration-[280ms] ease-out group-hover:w-full" />
             </a>
           ))}
         </div>

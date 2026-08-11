@@ -1,5 +1,6 @@
 import { Container } from "@/app/components/ui/container";
 import { Eyebrow } from "@/app/components/ui/eyebrow";
+import { Reveal } from "@/app/components/ui/reveal";
 import { Separator } from "@/components/ui/separator";
 import { practiceAreas } from "@/app/lib/site";
 
@@ -7,16 +8,16 @@ export function PracticeAreas() {
   return (
     <section id="areas" className="bg-white-warm py-20 md:py-[120px]">
       <Container className="grid grid-cols-1 items-center gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-20 lg:gap-28">
-        <div>
+        <Reveal>
           <Eyebrow>Áreas de atuação</Eyebrow>
           <h2 className="mt-4 max-w-[16ch] font-serif text-[clamp(2rem,3.4vw,2.75rem)] leading-[1.15] font-medium tracking-[0.01em] text-blue-dark">
             Três frentes, uma mesma exigência de profundidade.
           </h2>
-        </div>
+        </Reveal>
 
         <ol className="border-t border-border">
-          {practiceAreas.map((area) => (
-            <li key={area.numeral} id={area.id}>
+          {practiceAreas.map((area, index) => (
+            <Reveal as="li" key={area.numeral} id={area.id} delay={index * 80}>
               <div className="grid grid-cols-[auto_1fr] gap-5 py-8 md:gap-8 md:py-10">
                 <span
                   aria-hidden="true"
@@ -34,7 +35,7 @@ export function PracticeAreas() {
                 </div>
               </div>
               <Separator />
-            </li>
+            </Reveal>
           ))}
         </ol>
       </Container>

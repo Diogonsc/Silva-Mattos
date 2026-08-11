@@ -126,6 +126,26 @@ html {
   }
 }
 
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes whatsapp-pulse {
   0% {
     transform: scale(1);
@@ -138,6 +158,55 @@ html {
   100% {
     transform: scale(1.55);
     opacity: 0;
+  }
+}
+
+.hero-enter {
+  opacity: 0;
+  animation: hero-fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-delay-1 {
+  animation-delay: 100ms;
+}
+
+.hero-enter-delay-2 {
+  animation-delay: 200ms;
+}
+
+.hero-enter-delay-3 {
+  animation-delay: 300ms;
+}
+
+.hero-fade {
+  opacity: 0;
+  animation: hero-fade 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 100ms;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-fade,
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 

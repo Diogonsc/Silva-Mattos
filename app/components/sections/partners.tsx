@@ -1,4 +1,5 @@
 import { Container } from "@/app/components/ui/container";
+import { Reveal } from "@/app/components/ui/reveal";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -6,15 +7,22 @@ import { partners } from "@/app/lib/site";
 
 export function Partners() {
   return (
-    <section id="advogados" className="border-t border-border bg-background py-20 md:py-[120px]">
+    <section
+      id="advogados"
+      className="border-t border-border bg-background py-20 md:py-[120px]"
+    >
       <Container>
-        <SectionHeading eyebrow="Advogados" title="Quem conduz sua causa." />
+        <Reveal>
+          <SectionHeading eyebrow="Advogados" title="Quem conduz sua causa." />
+        </Reveal>
 
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          {partners.map((partner) => (
-            <article
+          {partners.map((partner, index) => (
+            <Reveal
+              as="article"
               key={partner.name}
-              className="bg-background px-7 py-11 md:px-11 md:py-14"
+              delay={index * 100}
+              className="bg-background px-7 py-11 transition-[box-shadow] duration-200 hover:z-10 hover:shadow-[0_14px_30px_rgb(15_29_51_/_0.08)] md:px-11 md:py-14"
             >
               <Avatar
                 size="lg"
@@ -42,7 +50,7 @@ export function Partners() {
                   {partner.email.display}
                 </a>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Container>
